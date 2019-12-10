@@ -28,17 +28,20 @@ def compare(music_file, metadata):
 def embed(music_file, meta_tags):
     """ Embed metadata. """
     embed = EmbedMetadata(music_file, meta_tags)
-    if music_file.endswith(".m4a"):
-        log.info("Applying metadata")
-        return embed.as_m4a()
-    elif music_file.endswith(".mp3"):
-        log.info("Applying metadata")
-        return embed.as_mp3()
-    elif music_file.endswith(".flac"):
-        log.info("Applying metadata")
-        return embed.as_flac()
-    else:
-        log.warning("Cannot embed metadata into given output extension")
+    try:
+        if music_file.endswith(".m4a"):
+            log.info("Applying metadata")
+            return embed.as_m4a()
+        elif music_file.endswith(".mp3"):
+            log.info("Applying metadata")
+            return embed.as_mp3()
+        elif music_file.endswith(".flac"):
+            log.info("Applying metadata")
+            return embed.as_flac()
+        else:
+            log.warning("Cannot embed metadata into given output extension")
+            return False
+    except:
         return False
 
 
